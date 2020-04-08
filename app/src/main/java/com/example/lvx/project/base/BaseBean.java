@@ -25,6 +25,11 @@ public class BaseBean <T> implements Serializable {
         this.message = message;
     }
 
+    public BaseBean(T data, int code) {
+        this.data = data;
+        this.code = code;
+    }
+
     public T getData() {
         return data;
     }

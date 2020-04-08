@@ -13,7 +13,7 @@ import io.reactivex.observers.DisposableObserver;
 import retrofit2.HttpException;
 
 /**
- * Description: 作用描述
+ * Description: 自定义观察者
  * Author: Administrator
  * CreateDate: 2020/4/7
  */
@@ -56,7 +56,7 @@ public abstract class BaseObserver <T> extends DisposableObserver<T> {
                 be = (BaseException) e;
                 //回调到view层 处理 或者根据项目情况处理
                 if (view != null) {
-                    // 处理登录失效 更新
+                    // 411处理登录失效 更新
                     view.onErrorCode(new BaseBean(be.getErrorCode(), be.getErrorMsg()));
                 } else {
                     onError(be.getErrorMsg());

@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     compileSdkVersion 28
 
@@ -14,9 +18,38 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
+
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            versionNameSuffix "-debug"
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            //混淆
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            //混淆
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //签名
+            //  signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "app_v${defaultConfig.versionName}_${releaseTime()}.apk"
+                        outputFileName = fileName
+                    }
+                }
+            }
         }
     }
 
@@ -48,6 +81,9 @@ dependencies {
 
     /*gson*/
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    /*Eventbus*/
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
     /*glide*/
     implementation 'com.github.bumptech.glide:glide:4.10.0'

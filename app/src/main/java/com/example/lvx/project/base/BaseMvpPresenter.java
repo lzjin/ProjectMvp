@@ -3,6 +3,8 @@ package com.example.lvx.project.base;
 import com.example.lvx.project.http.ApiService;
 import com.example.lvx.project.http.RetrofitService;
 
+import java.lang.ref.SoftReference;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -16,6 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
     protected ApiService httpRequest= RetrofitService.getInstance().apiService;
     private CompositeDisposable compositeDisposable;
+    private SoftReference<IBaseView> mReference;
     public V baseView;
 
     public BaseMvpPresenter(V baseView) {
@@ -27,7 +30,7 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
      */
     @Override
     public void attachView(IBaseView view) {
-
+        mReference=new SoftReference<>(view);
     }
     /**
      * 解除绑定
@@ -36,6 +39,8 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
     public void detachView() {
         baseView = null;
         removeDisposable();
+       // mReference.clear();
+        //mReference=null;
     }
     /**
      * 返回 view

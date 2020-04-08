@@ -1,5 +1,6 @@
 package com.example.lvx.project.base;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -11,6 +12,8 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.lvx.project.utils.IntentUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,16 +36,20 @@ public abstract class BaseMvpActivity<P extends BaseMvpPresenter> extends AppCom
     protected abstract void initData();
 
     protected P mPresenter;
-    public BaseMvpActivity activity;
-    //public EventBus eventBus;
-    private Unbinder mUnbinder;//释放资源用
 
+    protected EventBus eventBus;
+
+    private Unbinder mUnbinder;
+
+    public BaseMvpActivity activity;
+
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity=this;
         //设置竖屏
-       // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mPresenter = createPresenter();
         if(mPresenter!=null){
           //  mPresenter.attachView(this);
@@ -72,7 +79,7 @@ public abstract class BaseMvpActivity<P extends BaseMvpPresenter> extends AppCom
      * 注册eventbus
      */
     public void registEvent() {
-       // if (!eventBus.isRegistered(this)) eventBus.register(this);
+       if (!eventBus.isRegistered(this)) eventBus.register(this);
     }
     public void intenToActivity(Class toActivity){
         IntentUtil.IntenToActivity(activity,toActivity);
@@ -128,7 +135,7 @@ public abstract class BaseMvpActivity<P extends BaseMvpPresenter> extends AppCom
 
     @Override
     protected void onDestroy() {
-       // if (eventBus.isRegistered(this)) eventBus.unregister(this);
+        if (eventBus.isRegistered(this)) eventBus.unregister(this);
         super.onDestroy();
         if(mPresenter!=null){
             mPresenter.detachView();

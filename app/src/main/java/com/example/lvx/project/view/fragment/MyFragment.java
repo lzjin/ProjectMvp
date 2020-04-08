@@ -6,17 +6,17 @@ import com.example.lvx.project.base.BaseMvpFragment;
 import com.example.lvx.project.base.BaseMvpPresenter;
 
 /**
- * Description: 作用描述
+ * Description: 我的
  * Author: Administrator
- * CreateDate: 2020/4/7
+ * CreateDate: 2020/4/8
  */
-public class HomeFragment extends BaseMvpFragment {
-    private static volatile HomeFragment instance = null;
-    public static HomeFragment getInstance() {
+public class MyFragment extends BaseMvpFragment {
+    private static volatile MyFragment instance = null;
+    public static MyFragment getInstance() {
         if (instance == null) {
-            synchronized (HomeFragment.class) {
+            synchronized (MyFragment.class) {
                 if (instance == null) {
-                    instance = new HomeFragment();
+                    instance = new MyFragment();
                 }
             }
         }
@@ -29,7 +29,7 @@ public class HomeFragment extends BaseMvpFragment {
 
     @Override
     protected int setLayoutView() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_my;
     }
 
     @Override

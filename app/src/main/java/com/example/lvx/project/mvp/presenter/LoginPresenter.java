@@ -3,7 +3,6 @@ package com.example.lvx.project.mvp.presenter;
 import com.example.lvx.project.base.BaseBean;
 import com.example.lvx.project.base.BaseMvpPresenter;
 import com.example.lvx.project.base.BaseObserver;
-import com.example.lvx.project.listener.ResponseCallback;
 import com.example.lvx.project.mvp.view.ILoginView;
 
 import java.util.Map;
@@ -18,6 +17,10 @@ public class LoginPresenter extends BaseMvpPresenter<ILoginView> {
         super(baseView);
     }
 
+    /**
+     * 登录
+     * @param map
+     */
     public void login(Map<String,Object> map){
         addDisposable(httpRequest.login(map), new BaseObserver<BaseBean>(baseView,true) {
             @Override
@@ -30,7 +33,6 @@ public class LoginPresenter extends BaseMvpPresenter<ILoginView> {
                     }
                 }
             }
-
             @Override
             public void onError(String msg) {
                 if(baseView!=null){

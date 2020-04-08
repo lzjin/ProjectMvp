@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.example.lvx.project.utils.IntentUtil;
 import com.yechaoa.yutils.ActivityUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -34,10 +36,14 @@ public abstract class BaseMvpFragment <P extends BaseMvpPresenter> extends Fragm
     protected abstract void initData();
 
     protected P mPresenter;
+
+    protected EventBus eventBus;
+
+    private Unbinder mUnbinder;
+
+    protected View mRootView;
+
     public Activity fragmentActivity;
-    //public EventBus eventBus;
-    private Unbinder mUnbinder;//
-    public View mRootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public abstract class BaseMvpFragment <P extends BaseMvpPresenter> extends Fragm
     }
 
     public void registEvent() {
-       // if (!eventBus.isRegistered(this)) eventBus.register(this);
+        if (!eventBus.isRegistered(this)) eventBus.register(this);
     }
     public void intenToActivity(Class toActivity){
         IntentUtil.IntenToActivity(fragmentActivity,toActivity);
@@ -88,7 +94,7 @@ public abstract class BaseMvpFragment <P extends BaseMvpPresenter> extends Fragm
 
     @Override
     public void onDestroyView() {
-       // if (eventBus.isRegistered(this)) eventBus.unregister(this);
+        if (eventBus.isRegistered(this)) eventBus.unregister(this);
         super.onDestroyView();
         if(mPresenter!=null){
             mPresenter.detachView();

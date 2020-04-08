@@ -18,7 +18,7 @@ public class MainActivity extends BaseMvpActivity {
 
     @Override
     protected int setLayoutView() {
-        return R.layout.activity_main;
+        return R.layout.activity_welcome;
     }
 
     @Override

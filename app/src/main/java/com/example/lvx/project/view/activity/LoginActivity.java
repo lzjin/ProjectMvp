@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.lvx.project.MainActivity;
 import com.example.lvx.project.R;
 import com.example.lvx.project.base.BaseBean;
 import com.example.lvx.project.base.BaseMvpActivity;
@@ -15,6 +14,7 @@ import com.example.lvx.project.mvp.presenter.LoginPresenter;
 import com.example.lvx.project.mvp.view.ILoginView;
 import com.example.lvx.project.utils.MatcherUtil;
 import com.example.lvx.project.utils.ToastUtil;
+import com.yechaoa.yutils.YUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -101,12 +101,12 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
 
     @Override
     public void onShowLoading() {
-
+        YUtils.showLoading(this, "加载中");
     }
 
     @Override
     public void onHideLoading() {
-
+        YUtils.dismissLoading();
     }
 
     @Override
