@@ -1,6 +1,5 @@
 package com.example.lvx.project.view.activity;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -95,7 +93,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
         LoginBean bean= (LoginBean) object;
         //储存token
         //bean.getToken();
-        intenToActivity(MainActivity.class);
+        intenToActivity(HomeActivity.class);
     }
 
 

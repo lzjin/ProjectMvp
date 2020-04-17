@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  * Author: Administrator
  * CreateDate: 2020/4/8
  */
-public class MainActivity extends BaseMvpActivity {
+public class HomeActivity extends BaseMvpActivity {
     @BindView(R.id.main_fragment)
     FrameLayout mainFragment;
     @BindView(R.id.main_rb_home)

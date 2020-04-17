@@ -1,14 +1,15 @@
 package com.example.lvx.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import com.example.lvx.project.base.BaseBean;
 import com.example.lvx.project.base.BaseMvpActivity;
 import com.example.lvx.project.base.BaseMvpPresenter;
-import com.example.lvx.project.view.activity.LoginActivity;
+import com.example.lvx.project.view.activity.HomeActivity;
 
+/**
+ * Description: 欢迎页
+ * Author: Administrator
+ * CreateDate: 2020/4/8
+ */
 public class MainActivity extends BaseMvpActivity {
 
     @Override
@@ -23,7 +24,8 @@ public class MainActivity extends BaseMvpActivity {
 
     @Override
     protected void initView() {
-      intenToActivity(LoginActivity.class);
+      intenToActivity(HomeActivity.class);
+      finish();
     }
 
     @Override
