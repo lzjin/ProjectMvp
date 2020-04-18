@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.lvx.project.R;
+import com.example.lvx.project.dialog.BaseDialog;
+import com.example.lvx.project.dialog.WaitDialog;
 import com.example.lvx.project.utils.IntentUtil;
 import com.yechaoa.yutils.ActivityUtil;
 
@@ -25,9 +28,9 @@ import butterknife.Unbinder;
  * Author: Administrator
  * CreateDate: 2020/4/7
  */
-public abstract class BaseMvpFragment <P extends BaseMvpPresenter> extends Fragment implements IBaseView {
+public abstract class BaseMvpFragment<P extends BaseMvpPresenter> extends Fragment implements IBaseView {
 
-    protected abstract P   createPresenter();
+    protected abstract P createPresenter();
 
     protected abstract int setLayoutView();
 
@@ -45,58 +48,84 @@ public abstract class BaseMvpFragment <P extends BaseMvpPresenter> extends Fragm
 
     public Activity fragmentActivity;
 
+    public BaseDialog waitDialog;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentActivity=getActivity();
+        fragmentActivity = getActivity();
         //=new XProgressDialog(fragmentActivity);
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(setLayoutView(), container, false);
         fragmentActivity = ActivityUtil.getCurrentActivity();
         mPresenter = createPresenter();
-        if(mPresenter!=null){
-          //  mPresenter.attachView(this);
+        if (mPresenter != null) {
+            //  mPresenter.attachView(this);
         }
         initBase();
         initView();
         initData();
         return mRootView;
     }
+
     private void initBase() {
         mUnbinder = ButterKnife.bind(this, mRootView);
+        eventBus = EventBus.getDefault();
         //addToken();
+    }
+
+    public void showDialog() {
+        showDialog("");
+    }
+
+    public void showDialog(String message) {
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
+        waitDialog = null;
+        waitDialog = new WaitDialog.Builder(fragmentActivity)
+                .setMessage(message.equals("")?getString(R.string.str_loading):message).show();
+    }
+
+    public void dismissDialog(){
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
     }
 
     public void registEvent() {
         if (!eventBus.isRegistered(this)) eventBus.register(this);
     }
-    public void intenToActivity(Class toActivity){
-        IntentUtil.IntenToActivity(fragmentActivity,toActivity);
+
+    public void intenToActivity(Class toActivity) {
+        IntentUtil.IntenToActivity(fragmentActivity, toActivity);
     }
+
     public void intenToActivityWithBundle(Class toActivity, Bundle bundle) {
-        IntentUtil.IntenToActivityWithBundle(fragmentActivity,toActivity,bundle);
+        IntentUtil.IntenToActivityWithBundle(fragmentActivity, toActivity, bundle);
     }
 
     public void intenToActivityResult(Class toActivity, int requstCode) {
-        IntentUtil.IntenToActivityResult(fragmentActivity,toActivity,requstCode);
+        IntentUtil.IntenToActivityResult(fragmentActivity, toActivity, requstCode);
     }
 
     public void intenToActivityResultWithBundle(Class toActivity, int requstCode, Bundle bundle) {
-        IntentUtil.IntenToActivityResultWithBundle(fragmentActivity,toActivity,requstCode,bundle);
+        IntentUtil.IntenToActivityResultWithBundle(fragmentActivity, toActivity, requstCode, bundle);
     }
 
     public void intentFinishActivityResult(Bundle bundle) {
-        IntentUtil.IntentFinishActivityResult(fragmentActivity,bundle);
+        IntentUtil.IntentFinishActivityResult(fragmentActivity, bundle);
     }
 
     @Override
     public void onDestroyView() {
         if (eventBus.isRegistered(this)) eventBus.unregister(this);
         super.onDestroyView();
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
         mUnbinder.unbind();

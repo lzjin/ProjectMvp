@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
+import com.example.lvx.project.R;
+import com.example.lvx.project.dialog.BaseDialog;
+import com.example.lvx.project.dialog.WaitDialog;
 import com.example.lvx.project.utils.IntentUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,6 +46,8 @@ public abstract class BaseMvpActivity<P extends BaseMvpPresenter> extends AppCom
 
     public BaseMvpActivity activity;
 
+    public BaseDialog waitDialog;
+
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +68,7 @@ public abstract class BaseMvpActivity<P extends BaseMvpPresenter> extends AppCom
     private void initBase() {
         initSoftKeyboard();
         mUnbinder=ButterKnife.bind(this);
+        eventBus = EventBus.getDefault();
         setStatusBar();
     }
 
@@ -73,6 +79,25 @@ public abstract class BaseMvpActivity<P extends BaseMvpPresenter> extends AppCom
      */
     protected void setStatusBar() {
         //ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).fitsSystemWindows(true).init();
+    }
+
+    public void showDialog() {
+        showDialog("");
+    }
+
+    public void showDialog(String message) {
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
+        waitDialog = null;
+        waitDialog = new WaitDialog.Builder(activity)
+                .setMessage(message.equals("")?getString(R.string.str_loading):message).show();
+    }
+
+    public void dismissDialog(){
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
     }
 
     /**

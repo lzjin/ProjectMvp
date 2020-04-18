@@ -99,12 +99,14 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
 
     @Override
     public void onShowLoading() {
-        YUtils.showLoading(this, "加载中");
+        showDialog("登录中");
+       // YUtils.showLoading(this, "加载中");
     }
 
     @Override
     public void onHideLoading() {
-        YUtils.dismissLoading();
+        dismissDialog();
+        //YUtils.dismissLoading();
     }
 
     @Override
