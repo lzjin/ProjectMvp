@@ -1,5 +1,22 @@
 package com.example.lvx.project.base;
 
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
+import com.example.lvx.project.MainActivity;
+import com.example.lvx.project.MyApplication;
+import com.example.lvx.project.R;
+import com.example.lvx.project.dialog.BaseDialog;
+import com.example.lvx.project.dialog.InputDialog;
+import com.example.lvx.project.utils.MLog;
+import com.example.lvx.project.utils.ToastUtil;
+import com.example.lvx.project.view.activity.LoginActivity;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -17,7 +34,7 @@ import retrofit2.HttpException;
  * Author: Administrator
  * CreateDate: 2020/4/7
  */
-public abstract class BaseObserver <T> extends DisposableObserver<T> {
+public abstract class BaseObserver <T> extends DisposableObserver<BaseBean<T>> {
     protected IBaseView view;
     private boolean isShowDialog;
 
@@ -40,8 +57,36 @@ public abstract class BaseObserver <T> extends DisposableObserver<T> {
     }
 
     @Override
-    public void onNext(T t) {
-        onSuccess(t);
+    public void onNext(BaseBean<T> t) {
+        if(t.getCode()==100051){
+            MLog.e("-----------登录过期code");
+            Intent intent = new Intent(MyApplication.getAppContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            MyApplication.getAppContext().startActivity(intent);
+        }else if( t.getCode() == 10005 ){
+            MLog.e("-----------强制下线code");
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    MLog.e("--------2---强制下线code");
+
+//                    AlertDialog.Builder builer=new AlertDialog.Builder();
+//                    builer.setTitle("强制下线广播")
+//                            .setMessage("您的账号在异地登录")
+//                            .setCancelable(true)//设置取消按钮不能使用,
+//                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//
+//                                }
+//                            }).show();
+                }
+            });
+        } else if( t.getCode() != 200 ){
+            onError( new BaseException(t.getCode(),t.getMessage() ) );
+        }else {
+            onSuccess(t);
+        }
     }
 
     @Override
@@ -92,7 +137,7 @@ public abstract class BaseObserver <T> extends DisposableObserver<T> {
         }
     }
 
-    public abstract void onSuccess(T obj);
+    public abstract void onSuccess(BaseBean<T>  obj);
 
     public abstract void onError(String msg);
 }

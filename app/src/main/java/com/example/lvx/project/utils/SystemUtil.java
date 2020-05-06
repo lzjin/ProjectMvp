@@ -1,5 +1,6 @@
 package com.example.lvx.project.utils;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -10,7 +11,10 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -322,5 +326,35 @@ public class SystemUtil {
 		return appName;
 	}
 
+
+	/**
+	 * 获取 deviceId 部分手机无法获取
+	 * @param context
+	 * @return
+	 */
+	@SuppressLint("MissingPermission")
+	public static String getDeviceId(Context context) {
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		if (tm == null) {
+			return "";
+		}
+		return "" + tm.getDeviceId();
+	}
+	/**
+	 * 单点登录 推荐
+	 * 获取MAC地址，注意：手机重启，mac地址为null；
+	 * @param context
+	 * @return mac地址；
+	 */
+	public static String getPhoneMac(Context context) {
+		if (context != null) {
+			WifiManager wifi = (WifiManager) context
+					.getSystemService(Context.WIFI_SERVICE);
+			WifiInfo info = wifi.getConnectionInfo();
+			return info.getMacAddress();
+		} else {
+			return "";
+		}
+	}
 
 }
