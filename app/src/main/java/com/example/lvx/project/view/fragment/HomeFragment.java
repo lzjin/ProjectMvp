@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.lvx.project.R;
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpFragment;
 import com.example.lvx.project.mvp.presenter.HomePresenter;
 import com.example.lvx.project.mvp.view.IHomeView;
@@ -90,7 +90,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements IHom
     }
 
     @Override
-    public void onErrorCode(BaseBean bean) {
+    public void onErrorCode(BaseResponseBean bean) {
 
     }
 

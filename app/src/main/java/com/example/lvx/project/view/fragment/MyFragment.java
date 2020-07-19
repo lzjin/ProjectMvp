@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.lvx.project.R;
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpFragment;
 import com.example.lvx.project.base.BaseMvpPresenter;
 import com.example.lvx.project.dialog.BaseDialog;
@@ -180,7 +180,7 @@ public class MyFragment extends BaseMvpFragment {
     }
 
     @Override
-    public void onErrorCode(BaseBean bean) {
+    public void onErrorCode(BaseResponseBean bean) {
 
     }
 

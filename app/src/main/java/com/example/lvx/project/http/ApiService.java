@@ -1,6 +1,6 @@
 package com.example.lvx.project.http;
 
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.entity.LoginBean;
 import java.util.Map;
 import io.reactivex.Observable;
@@ -28,7 +28,7 @@ public interface ApiService {
     @Headers("Content-type:application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("uapi/api/pub/user/login")
-    Observable<BaseBean<LoginBean>> login(@FieldMap Map<String, Object> map);
+    Observable<BaseResponseBean<LoginBean>> login(@FieldMap Map<String, Object> map);
     //获取验证码
     @GET("uapi/api/pub/user/sms")
     Observable<ResponseBody> getVerifyCode(@Query("telephone") String telephone, @Query("sign") String sign);
@@ -39,5 +39,5 @@ public interface ApiService {
     @Headers("Content-type:application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("uapi/api/pub/user/smslogin")
-    Observable<BaseBean> smslogin(@FieldMap Map<String, Object> map);
+    Observable<BaseResponseBean> smslogin(@FieldMap Map<String, Object> map);
 }

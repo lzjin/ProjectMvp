@@ -79,6 +79,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.7.0'
 
+    //cookie管理
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
+
     /*gson*/
     implementation 'com.google.code.gson:gson:2.8.5'
 
@@ -98,4 +101,5 @@ dependencies {
 
     /*BRVAH*/
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+
 }

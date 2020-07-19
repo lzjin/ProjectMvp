@@ -1,12 +1,9 @@
 package com.example.lvx.project.mvp.presenter;
 
-import android.app.Activity;
-
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpPresenter;
 import com.example.lvx.project.base.BaseObserver;
 import com.example.lvx.project.mvp.view.IHomeView;
-import com.example.lvx.project.mvp.view.ILoginView;
 
 import java.util.Map;
 
@@ -25,9 +22,9 @@ public class HomePresenter extends BaseMvpPresenter<IHomeView> {
      * @param map
      */
     public void testPost(Map<String,Object> map){
-        addDisposable(httpRequest.login(map), new BaseObserver<BaseBean>(baseView,true) {
+        addDisposable(httpRequest.login(map), new BaseObserver<BaseResponseBean>(baseView,true) {
             @Override
-            public void onSuccess(BaseBean bean) {
+            public void onSuccess(BaseResponseBean bean) {
                 if(baseView!=null){
                     if(bean.getCode()==10000&&bean.getData()!=null){
                        // baseView.doSuccess(bean.getData());

@@ -10,7 +10,7 @@ public class MLog {
 
     public static boolean isShowLogo = true;
 
-    private static final String TAG = "MLog";
+    private static final String TAG = "testz";
 
     public static void i(String message) {
         if(isShowLogo)Log.i(TAG, "--------------"+message);

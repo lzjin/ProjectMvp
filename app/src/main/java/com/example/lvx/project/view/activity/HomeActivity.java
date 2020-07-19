@@ -1,12 +1,11 @@
 package com.example.lvx.project.view.activity;
 
-import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.lvx.project.R;
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpActivity;
 import com.example.lvx.project.base.BaseMvpPresenter;
 import com.example.lvx.project.utils.FragmentUtil;
@@ -16,7 +15,6 @@ import com.example.lvx.project.view.fragment.MyFragment;
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Description: 作用描述
@@ -89,7 +87,7 @@ public class HomeActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void onErrorCode(BaseBean bean) {
+    public void onErrorCode(BaseResponseBean bean) {
 
     }
 

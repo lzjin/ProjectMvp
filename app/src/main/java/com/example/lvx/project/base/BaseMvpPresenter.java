@@ -1,6 +1,8 @@
 package com.example.lvx.project.base;
 
+import com.example.lvx.project.MyApplication;
 import com.example.lvx.project.http.ApiService;
+import com.example.lvx.project.http.HttpRetrofit;
 import com.example.lvx.project.http.RetrofitService;
 
 import java.lang.ref.SoftReference;

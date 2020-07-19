@@ -21,5 +21,5 @@ public interface IBaseView {
     /**
      * 异常消息
      */
-    void onErrorCode(BaseBean bean);
+    void onErrorCode(BaseResponseBean bean);
 }

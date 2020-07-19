@@ -1,6 +1,6 @@
 package com.example.lvx.project;
 
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpActivity;
 import com.example.lvx.project.base.BaseMvpPresenter;
 import com.example.lvx.project.view.activity.HomeActivity;
@@ -50,7 +50,7 @@ public class MainActivity extends BaseMvpActivity {
     }
 
     @Override
-    public void onErrorCode(BaseBean bean) {
+    public void onErrorCode(BaseResponseBean bean) {
 
     }
 }

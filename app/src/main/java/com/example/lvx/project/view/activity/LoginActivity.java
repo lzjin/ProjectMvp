@@ -6,14 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.lvx.project.R;
-import com.example.lvx.project.base.BaseBean;
+import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpActivity;
 import com.example.lvx.project.entity.LoginBean;
 import com.example.lvx.project.mvp.presenter.LoginPresenter;
 import com.example.lvx.project.mvp.view.ILoginView;
 import com.example.lvx.project.utils.MatcherUtil;
 import com.example.lvx.project.utils.ToastUtil;
-import com.yechaoa.yutils.YUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +32,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
     EditText edtUserPassword;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.btn_login2)
+    Button btnLogin2;
 
     @Override
     protected LoginPresenter createPresenter() {
@@ -54,11 +55,14 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
 
     }
 
-    @OnClick({ R.id.btn_login})
+    @OnClick({ R.id.btn_login,R.id.btn_login2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
                  passLogin();
+                break;
+            case R.id.btn_login2:
+                passLogin2();
                 break;
         }
     }
@@ -87,7 +91,27 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
             mPresenter.login(params);
         }
     }
-
+    private void passLogin2() {
+        if (TextUtils.isEmpty(edtUserName.getText().toString())) {
+            ToastUtil.showShort( this,"手机号不能为空");
+            return;
+        } else if (edtUserName.getText().toString().trim().length() != 11) {
+            ToastUtil.showShort( this,"请输入11位手机号码");
+            return;
+        } else if (!MatcherUtil.matcherPhone(edtUserName.getText().toString().trim())) {
+            ToastUtil.showShort( this, "请输入正确的手机号");
+            return;
+        } else if (TextUtils.isEmpty(edtUserPassword.getText().toString())) {
+            ToastUtil.showShort( this, "密码不能为空");
+            return;
+        } else {
+            hasWindowFocus();
+            Map<String, Object> params = new HashMap<>();
+            params.put("account", edtUserName.getText().toString());
+            params.put("password", edtUserPassword.getText().toString());
+            mPresenter.login2(params);
+        }
+    }
     @Override
     public void doSuccess(Object object) {
         LoginBean bean= (LoginBean) object;
@@ -115,7 +139,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
     }
 
     @Override
-    public void onErrorCode(BaseBean bean) {
+    public void onErrorCode(BaseResponseBean bean) {
 
     }
 }

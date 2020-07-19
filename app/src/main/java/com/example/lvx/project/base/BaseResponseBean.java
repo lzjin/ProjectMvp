@@ -1,7 +1,5 @@
 package com.example.lvx.project.base;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 /**
@@ -9,7 +7,7 @@ import java.io.Serializable;
  * Author: Administrator
  * CreateDate: 2020/4/7
  */
-public class BaseBean <T> implements Serializable {
+public class BaseResponseBean<T> implements Serializable {
 
     /**
      * data : {"token":"TEzNDE4OTAzMTM5MTIzMiMxMzAxODIwNjcxMCNlMTBhZGMzOTQ5YmE1OWFiYmU1NmUwNTdmMjBmODgzZQ==MTIxO","status":-1,"isOldUser":true}
@@ -20,12 +18,12 @@ public class BaseBean <T> implements Serializable {
     private int code;
     private String message;
 
-    public BaseBean(int code, String message) {
+    public BaseResponseBean(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public BaseBean(T data, int code) {
+    public BaseResponseBean(T data, int code) {
         this.data = data;
         this.code = code;
     }
