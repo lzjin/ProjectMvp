@@ -31,7 +31,7 @@ public interface UserInfoApi {
     //登录
     @Headers("Content-type:application/x-www-form-urlencoded")
     @FormUrlEncoded
-    @POST("uapi/api/pub/user/login")
+    @POST("uapi/api/pub/user/login2")
     Observable<BaseResponseBean<LoginBean>> login2(@FieldMap Map<String, Object> map);
 
 

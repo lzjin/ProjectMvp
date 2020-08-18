@@ -18,6 +18,9 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -80,13 +83,14 @@ public class HttpRetrofit {
                 .build();
         RedirectInterceptor redirectInterceptor = new RedirectInterceptor(client);//初始化重定向拦截器
         // AddHeadInterceptor addHeadInterceptor = new AddHeadInterceptor();//初始化加头部拦截器
-        StatisticsInterceptor statisticsInterceptor = new StatisticsInterceptor(context);//初始化统计拦截器
+        StatisticsInterceptor statisticsInterceptor = new StatisticsInterceptor(5,1000);//初始化统计拦截器
         okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 //.addNetworkInterceptor(addHeadInterceptor)//使用加头部拦截器
                 .addNetworkInterceptor(redirectInterceptor)//使用重定向拦截器
-                .addNetworkInterceptor(statisticsInterceptor)//使用统计拦截器
+               // .addNetworkInterceptor(statisticsInterceptor)//重试
+                .addInterceptor(statisticsInterceptor)//重试
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -138,24 +142,7 @@ public class HttpRetrofit {
                 .build();
         T t = retrofit.create(clazz);
         if (t instanceof DownloadApi) {//判断是否是DownloadApi
-            Retrofit retrofitDown = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(okHttpClient.newBuilder().addNetworkInterceptor(new Interceptor() {
-                        @Override
-                        public Response intercept(Chain chain) throws IOException {
-                            Response orginalResponse = chain.proceed(chain.request());
-                            return orginalResponse.newBuilder()
-                                    .body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
-                                        @Override
-                                        public void onProgress(long progress, long total, boolean done) {
-                                            //EventBus.getDefault().post(new ProgressEvent(total, progress, done));//传递进度
-                                        }
-                                    })).build();
-                        }
-                    }).build())
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            return retrofitDown.create(clazz);
+            return downloadApk().create(clazz);
         }
         return t;
     }
@@ -173,18 +160,25 @@ public class HttpRetrofit {
         return t;
     }
 
-    /**
-     * 根据Response，判断Token是否失效
-     * 401表示token过期
-     *
-     * @param response
-     * @return
-     */
-    private boolean isTokenExpired(Response response) {
-        if (response.code() == 401) {
-            return true;
-        }
-        return false;
+    private  static Retrofit  downloadApk(){
+        Retrofit retrofitDownload = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient.newBuilder().addNetworkInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Response orginalResponse = chain.proceed(chain.request());
+                        return orginalResponse.newBuilder()
+                                .body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
+                                    @Override
+                                    public void onProgress(long progress, long total, boolean done) {
+                                        // EventBus.getDefault().post(new ProgressEvent(total, progress, done));//传递进度
+                                    }
+                                })).build();
+                    }
+                }).build())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return retrofitDownload;
     }
 
     /**
@@ -214,6 +208,19 @@ public class HttpRetrofit {
         return "";
     }
 
+    /**
+     * 根据Response，判断Token是否失效
+     * 401表示token过期
+     *
+     * @param response
+     * @return
+     */
+    private boolean isTokenExpired(Response response) {
+        if (response.code() == 401) {
+            return true;
+        }
+        return false;
+    }
     /**
      * 根据Response，判断Token是否失效
      * 402表示用户被挤下线

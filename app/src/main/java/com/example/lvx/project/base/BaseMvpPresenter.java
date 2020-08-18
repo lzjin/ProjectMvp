@@ -23,11 +23,15 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
     private SoftReference<IBaseView> mReference;
     public V baseView;
 
+    /**
+     *  绑定View 1
+     * @param baseView
+     */
     public BaseMvpPresenter(V baseView) {
         this.baseView = baseView;
     }
     /**
-     * 绑定View
+     * 绑定View 2
      * @param view
      */
     @Override
@@ -53,7 +57,7 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
     }
 
     public void addDisposable(Observable<?> observable, BaseObserver observer) {
-        if (compositeDisposable == null) {
+        if (compositeDisposable == null ) {
             compositeDisposable = new CompositeDisposable();
         }
         compositeDisposable.add(observable.subscribeOn(Schedulers.io())
@@ -62,6 +66,7 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
     }
 
     private void removeDisposable() {
+        // 在界面退出等需要解绑观察者的情况下调用此方法统一解绑，防止Rx造成的内存泄漏
         if (compositeDisposable != null) {
             compositeDisposable.dispose();
         }
