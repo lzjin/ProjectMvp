@@ -3,21 +3,224 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="测试登录过期" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="单点登录" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="测试登录过期" />
+
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单点登录" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_bottom_shadow_bg"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_bottom_shadow_bg_radius14"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="2" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_cneter_shadow_bg"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="3" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_left_shadow_bg"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="4" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_right_shadow_bg"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="5" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_shadow_bg"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="6" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_shadow_bg_radius8"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="7" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_shadow_bg_radius14"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="8" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_shadow_bg_radius14_black"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="9" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_top_shadow_bg"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="10" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_item_top_shadow_bg_radius14"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="11" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>
