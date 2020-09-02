@@ -102,4 +102,10 @@ dependencies {
     /*BRVAH*/
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
 
+    /*转义工具*/
+    implementation 'org.apache.commons:commons-text:1.8'
+
+    /*去掉/工具*/
+   // implementation 'org.apache.commons:commons-lang3:3.8.1'
+
 }

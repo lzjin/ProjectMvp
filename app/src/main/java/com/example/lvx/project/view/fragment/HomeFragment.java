@@ -1,5 +1,6 @@
 package com.example.lvx.project.view.fragment;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,6 +11,9 @@ import com.example.lvx.project.mvp.presenter.HomePresenter;
 import com.example.lvx.project.mvp.view.IHomeView;
 import com.example.lvx.project.utils.SystemUtil;
 import com.example.lvx.project.utils.ToastUtil;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,8 +56,18 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements IHom
 
     @Override
     protected void initView() {
-
+        test();
     }
+
+    public void test(){
+        String str1 = "{\\\"resourceId\":\"dfead70e4ec5c11e43514000ced0cdcaf\",\"properties\":{\"process_id\":\"process4\",\"name\":\"\",\"documentation\":\"\",\"processformtemplate\":\"\"}}";
+        Log.e("testz","--------------str1="+str1);
+        String tmp = StringEscapeUtils.unescapeJson(str1);
+        Log.e("testz","--------------tmp="+tmp);
+    }
+
+
+
 
     @OnClick({R.id.btn_1, R.id.btn_2})
     public void onViewClicked(View view) {
