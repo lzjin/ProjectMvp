@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.lvx.project.http.HttpRetrofit;
 import com.example.lvx.project.prefs.AppPreference;
+import com.example.lvx.project.utils.FontsUtil;
 import com.example.lvx.project.utils.MLog;
 import com.yechaoa.yutils.ActivityUtil;
 import com.yechaoa.yutils.YUtils;
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
         AppPreference.init(this);
         //初始化网络
         initRetrofitUtil();
+        initTypeface();
     }
 
     public static Context getAppContext() {
@@ -43,5 +45,12 @@ public class MyApplication extends Application {
         new HttpRetrofit(getAppContext());
         //new RetrofitUtilTest(getApplicationContext());
 //        LogUtil.i("初始化网络请求加载器");
+    }
+
+    /**
+     * 设置全局默认字体
+     */
+    private void  initTypeface(){
+          FontsUtil.setDefaultFont(this, "SANS_SERIF", "fonts/SIMLI.TTF");
     }
 }

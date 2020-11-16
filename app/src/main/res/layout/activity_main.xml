@@ -16,9 +16,9 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="0.7dp"
+        android:layout_height="0.5dp"
         android:layout_above="@+id/main_group"
-        android:background="@color/graydd"/>
+        android:background="#F2F2F2"/>
 
     <RadioGroup
         android:id="@+id/main_group"
