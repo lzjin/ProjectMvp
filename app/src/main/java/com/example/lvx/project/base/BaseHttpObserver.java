@@ -20,7 +20,7 @@ import retrofit2.HttpException;
  * Author: Administrator
  * CreateDate: 2020/4/7
  */
-public abstract class BaseObserver <T> extends DisposableObserver<BaseResponseBean<T>> {
+public abstract class BaseHttpObserver<T> extends DisposableObserver<BaseResponseBean<T>> {
     protected IBaseView view;
     private boolean isShowDialog;
 
@@ -30,7 +30,7 @@ public abstract class BaseObserver <T> extends DisposableObserver<BaseResponseBe
      * @param view         view
      * @param isShowDialog 是否显示进度条
      */
-    protected BaseObserver(IBaseView view, boolean isShowDialog) {
+    protected BaseHttpObserver(IBaseView view, boolean isShowDialog) {
         this.view = view;
         this.isShowDialog = isShowDialog;
     }

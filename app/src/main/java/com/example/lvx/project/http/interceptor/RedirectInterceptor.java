@@ -36,19 +36,6 @@ public class  RedirectInterceptor implements Interceptor {
                 }
                 break;
         }
-
-//        if (url.equals(HttpConstant.URL_LOGIN) || url.equals(HttpConstant.URL_IS_REGISTERED)){//去掉sign_check和registered的cookie
-//            String cookie = request.header("Cookie");
-//            if (cookie!=null && cookie.contains("AppAuthToken")){
-//                String sessionId = cookie.substring(0, cookie.indexOf("AppAuthToken"));
-//                request=request.newBuilder().removeHeader("Cookie").addHeader("Cookie",sessionId).build();
-//            }
-//            if (cookie!=null){
-//                request=request.newBuilder().removeHeader("Cookie").build();
-//            }
-//
-//        }
-
         Response responseNromal = chain.proceed(request);//执行请求
 //        if (responseNromal.isRedirect()) {//是重定向请求
 //            Response responseNew = interceptRedirect(request, responseNromal);//检查重定向

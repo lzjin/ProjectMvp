@@ -81,16 +81,11 @@ public class HttpRetrofit {
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
-        RedirectInterceptor redirectInterceptor = new RedirectInterceptor(client);//初始化重定向拦截器
-        // AddHeadInterceptor addHeadInterceptor = new AddHeadInterceptor();//初始化加头部拦截器
-        StatisticsInterceptor statisticsInterceptor = new StatisticsInterceptor(5,1000);//初始化统计拦截器
         okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                //.addNetworkInterceptor(addHeadInterceptor)//使用加头部拦截器
-                .addNetworkInterceptor(redirectInterceptor)//使用重定向拦截器
-               // .addNetworkInterceptor(statisticsInterceptor)//重试
-                .addInterceptor(statisticsInterceptor)//重试
+                .addNetworkInterceptor(new RedirectInterceptor(client))//使用重定向拦截器
+                .addInterceptor(new StatisticsInterceptor(5,1000))//重试
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {

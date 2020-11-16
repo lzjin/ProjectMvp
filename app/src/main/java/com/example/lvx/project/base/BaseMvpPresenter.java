@@ -1,8 +1,6 @@
 package com.example.lvx.project.base;
 
-import com.example.lvx.project.MyApplication;
 import com.example.lvx.project.http.ApiService;
-import com.example.lvx.project.http.HttpRetrofit;
 import com.example.lvx.project.http.RetrofitService;
 
 import java.lang.ref.SoftReference;
@@ -56,7 +54,7 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
         return baseView;
     }
 
-    public void addDisposable(Observable<?> observable, BaseObserver observer) {
+    public void addDisposable(Observable<?> observable, BaseHttpObserver observer) {
         if (compositeDisposable == null ) {
             compositeDisposable = new CompositeDisposable();
         }

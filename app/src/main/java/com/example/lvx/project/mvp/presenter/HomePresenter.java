@@ -1,8 +1,8 @@
 package com.example.lvx.project.mvp.presenter;
 
+import com.example.lvx.project.base.BaseHttpObserver;
 import com.example.lvx.project.base.BaseResponseBean;
 import com.example.lvx.project.base.BaseMvpPresenter;
-import com.example.lvx.project.base.BaseObserver;
 import com.example.lvx.project.mvp.view.IHomeView;
 
 import java.util.Map;
@@ -22,7 +22,7 @@ public class HomePresenter extends BaseMvpPresenter<IHomeView> {
      * @param map
      */
     public void testPost(Map<String,Object> map){
-        addDisposable(httpRequest.login(map), new BaseObserver<BaseResponseBean>(baseView,true) {
+        addDisposable(httpRequest.login(map), new BaseHttpObserver<BaseResponseBean>(baseView,true) {
             @Override
             public void onSuccess(BaseResponseBean bean) {
                 if(baseView!=null){
