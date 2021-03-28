@@ -45,12 +45,20 @@
         android:text="登录"/>
 
     <Button
-        android:id="@+id/btn_login2"
+        android:id="@+id/btn_together"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="18sp"
-        android:text="登录2"/>
+        android:text="接口同时并发"/>
+    <Button
+        android:id="@+id/btn_queue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:text="接口依次发送"/>
 
 </LinearLayout>

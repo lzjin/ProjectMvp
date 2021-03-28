@@ -32,7 +32,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
     EditText edtUserPassword;
     @BindView(R.id.btn_login)
     Button btnLogin;
-    @BindView(R.id.btn_login2)
+    @BindView(R.id.btn_together)
     Button btnLogin2;
 
     @Override
@@ -55,14 +55,17 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
 
     }
 
-    @OnClick({ R.id.btn_login,R.id.btn_login2})
+    @OnClick({ R.id.btn_login,R.id.btn_together,R.id.btn_queue})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
                  passLogin();
                 break;
-            case R.id.btn_login2:
-                passLogin2();
+            case R.id.btn_together:
+                togetherRequest();
+                break;
+            case R.id.btn_queue:
+                queueListRequest();
                 break;
         }
     }
@@ -91,26 +94,19 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements IL
             mPresenter.login(params);
         }
     }
-    private void passLogin2() {
-        if (TextUtils.isEmpty(edtUserName.getText().toString())) {
-            ToastUtil.showShort( this,"手机号不能为空");
-            return;
-        } else if (edtUserName.getText().toString().trim().length() != 11) {
-            ToastUtil.showShort( this,"请输入11位手机号码");
-            return;
-        } else if (!MatcherUtil.matcherPhone(edtUserName.getText().toString().trim())) {
-            ToastUtil.showShort( this, "请输入正确的手机号");
-            return;
-        } else if (TextUtils.isEmpty(edtUserPassword.getText().toString())) {
-            ToastUtil.showShort( this, "密码不能为空");
-            return;
-        } else {
-            hasWindowFocus();
-            Map<String, Object> params = new HashMap<>();
-            params.put("account", edtUserName.getText().toString());
-            params.put("password", edtUserPassword.getText().toString());
-            mPresenter.login2(params);
-        }
+
+    /**
+     * 接口并发
+     */
+    private void togetherRequest() {
+            mPresenter.togetherRequest();
+    }
+
+    /**
+     * 接口依次发送
+     */
+    private void queueListRequest(){
+      mPresenter.queueListRequest();
     }
     @Override
     public void doSuccess(Object object) {

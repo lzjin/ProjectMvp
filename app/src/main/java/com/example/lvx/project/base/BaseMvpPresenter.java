@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
  * Author: Administrator
  * CreateDate: 2020/4/7
  */
-public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
+public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter<V> {
     protected ApiService httpRequest= RetrofitService.getInstance().apiService;
     private CompositeDisposable compositeDisposable;
     private SoftReference<IBaseView> mReference;
@@ -50,7 +50,7 @@ public class BaseMvpPresenter<V extends IBaseView> implements IBasePresenter {
      * 返回 view
      */
     @Override
-    public IBaseView getBaseView() {
+    public V getBaseView() {
         return baseView;
     }
 

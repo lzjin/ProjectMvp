@@ -23,16 +23,19 @@ public class StatisticsInterceptor implements Interceptor {
         Request request = chain.request();
         Response response = chain.proceed(request);//执行请求
         String url = request.url().toString();
-        int retryNum = 0;
-        while(!response.isSuccessful()&&retryNum<mMaxRetryCount){
-            try {
-                Thread.sleep(mRetryInterval);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        //轮播接口重试5次
+        if(url.contains("banner/data")){
+            int retryNum = 0;
+            while(!response.isSuccessful()&&retryNum<mMaxRetryCount){
+                try {
+                    Thread.sleep(mRetryInterval);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                retryNum++;
+                response = chain.proceed(request);
+                MLog.e("--------------------重试次数="+retryNum);
             }
-            retryNum++;
-            response = chain.proceed(request);
-            MLog.e("--------------------重试次数="+retryNum);
         }
         return response;
     }

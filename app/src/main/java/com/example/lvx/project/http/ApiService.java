@@ -1,7 +1,11 @@
 package com.example.lvx.project.http;
 
 import com.example.lvx.project.base.BaseResponseBean;
+import com.example.lvx.project.entity.BannerBean;
 import com.example.lvx.project.entity.LoginBean;
+import com.example.lvx.project.entity.VersionBean;
+
+import java.util.List;
 import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -39,5 +43,13 @@ public interface ApiService {
     @Headers("Content-type:application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("uapi/api/pub/user/smslogin")
-    Observable<BaseResponseBean> smslogin(@FieldMap Map<String, Object> map);
+    Observable<BaseResponseBean<LoginBean>> smslogin(@FieldMap Map<String, Object> map);
+
+    //广告
+    @GET("uapi/api/pub/banner/data")
+    Observable<BaseResponseBean<List<BannerBean>>> getBanner();
+
+    //版本更新
+    @GET("uapi/api/pub/sysConfig/getVal")
+    Observable<BaseResponseBean<VersionBean>> getVersionCode(@Query("paramKey") String paramKey);
 }

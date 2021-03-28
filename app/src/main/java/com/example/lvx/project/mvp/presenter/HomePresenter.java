@@ -22,6 +22,8 @@ public class HomePresenter extends BaseMvpPresenter<IHomeView> {
      * @param map
      */
     public void testPost(Map<String,Object> map){
+        //httpRequest.login(map)
+        //HttpRetrofit.createApi(UserInfoApi.class).login2(map)
         addDisposable(httpRequest.login(map), new BaseHttpObserver<BaseResponseBean>(baseView,true) {
             @Override
             public void onSuccess(BaseResponseBean bean) {

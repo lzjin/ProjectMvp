@@ -32,7 +32,7 @@ public interface UserInfoApi {
     @Headers("Content-type:application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("uapi/api/pub/user/login2")
-    Observable<BaseResponseBean<LoginBean>> login2(@FieldMap Map<String, Object> map);
+    Observable<BaseResponseBean<LoginBean>> login(@FieldMap Map<String, Object> map);
 
 
 }
